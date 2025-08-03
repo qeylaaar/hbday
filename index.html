@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Happy Birthday 🎉</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <!-- Opening screen -->
+  <div id="opening-screen">
+    <div class="opening-text">Tunggu sebentar yaa... 💖</div>
+  </div>
+
+  <!-- Pesan dariku sebelum halaman utama -->
+  <div id="pesan-awal" style="display: none;">
+    <div class="pesan-box">
+      <p class="pesan-text" id="pesan-ketik"></p>
+      <button id="lanjutkan-btn">Lanjutkan</button>
+    </div>
+  </div>
+
+  <!-- Main content -->
+  <div class="container" style="display: none;">
+    <h1>Happy Birthday, Sayang! 🎂</h1>
+    <p class="message" id="typewriter">
+      <br>
+      Happy birthday Salma Sa'adah, semoga di umur mu yang semakin bertambah, kamu bisa semakin berkembang lebih jauh, dilancarkan segala urusannya.
+      intinya, tidak lupa mendoakan semoga panjang umur, sehat selalu dan semoga hal-hal baik selalu menghampirimu.
+      <br>
+    </p>
+
+    <div id="photo-collage" class="photo-collage collapsed">
+      <img src="img/foto1.jpeg" alt="Foto 1" />
+      <img src="img/foto2.jpeg" alt="Foto 2" />
+      <img src="img/foto3.jpeg" alt="Foto 3" />
+      <img src="img/foto4.jpeg" alt="Foto 4" />
+      <img src="img/foto5.jpeg" alt="Foto 5" />
+      <img src="img/foto6.jpeg" alt="Foto 6" />
+      <img src="img/foto7.jpg" alt="Foto 7" />
+      <img src="img/foto8.jpg" alt="Foto 8" />
+      <img src="img/foto9.jpg" alt="Foto 9" />
+      <img src="img/foto10.jpg" alt="Foto 10" />
+      <img src="img/foto11.jpg" alt="Foto 11" />
+      <img src="img/foto12.jpg" alt="Foto 12" />
+      <img src="img/foto13.jpg" alt="Foto 13" />
+      <img src="img/foto14.jpg" alt="Foto 14" />
+      <img src="img/foto15.jpg" alt="Foto 15" />
+      <img src="img/foto16.jpg" alt="Foto 16" />
+      <img src="img/foto17.jpg" alt="Foto 17" />
+      <img src="img/foto18.jpg" alt="Foto 18" />
+      <img src="img/foto19.jpg" alt="Foto 19" />
+      <img src="img/foto20.jpg" alt="Foto 20" />
+      <img src="img/foto21.jpg" alt="Foto 21" />
+      <img src="img/foto22.jpeg" alt="Foto 22" />
+      <img src="img/foto23.jpeg" alt="Foto 23" />
+      <img src="img/foto24.jpeg" alt="Foto 24" />
+      <img src="img/foto25.jpeg" alt="Foto 25" />
+      <img src="img/foto26.jpeg" alt="Foto 26" />
+      <img src="img/foto27.jpeg" alt="Foto 27" />
+      <img src="img/foto28.jpeg" alt="Foto 28" />
+      <img src="img/foto29.jpeg" alt="Foto 29" />
+      <img src="img/foto30.jpeg" alt="Foto 30" />
+    </div>
+    <button id="toggleButton">Lihat Semua Foto 📸</button>
+  </div>
+
+  <!-- Musik YouTube -->
+  <div class="music">
+    <iframe width="0" height="0" src="https://www.youtube.com/embed/EjtxTX_VjxE?autoplay=1&loop=1&playlist=EjtxTX_VjxE" frameborder="0" allow="autoplay" allowfullscreen></iframe>
+  </div>
+
+
+  <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+  <script>
+    const openingScreen = document.getElementById("opening-screen");
+    const pesanAwal = document.getElementById("pesan-awal");
+    const lanjutkanBtn = document.getElementById("lanjutkan-btn");
+    const mainContent = document.querySelector(".container");
+    const pesanText = [
+      "Disclaimer dulu...",
+      "Sebelumnya mohon maaf untuk kadonya kecil-kecilan dulu.",
+      "Maaf aku masih kurang dalam segi apapun,",
+      "dan maaf juga kalo ternyata tidak sesuai dengan ekspetasi kamu.",
+      "P.S : kado sisanya menyusul yaa cintaa ^^"
+    ];
+
+    let pesanIndex = 0;
+    let charIndex = 0;
+    const pesanTarget = document.getElementById("pesan-ketik");
+
+    function ketikPesan() {
+      if (pesanIndex < pesanText.length) {
+        if (charIndex < pesanText[pesanIndex].length) {
+          pesanTarget.innerHTML += pesanText[pesanIndex].charAt(charIndex);
+          charIndex++;
+          setTimeout(ketikPesan, 40);
+        } else {
+          pesanTarget.innerHTML += "<br/>";
+          pesanIndex++;
+          charIndex = 0;
+          setTimeout(ketikPesan, 500);
+        }
+      }
+    }
+
+    window.onload = () => {
+      setTimeout(() => {
+        openingScreen.style.opacity = "0";
+        setTimeout(() => {
+          openingScreen.style.display = "none";
+          pesanAwal.style.display = "flex";
+          ketikPesan();
+        }, 1000);
+      }, 2000);
+    };
+
+    lanjutkanBtn.addEventListener("click", () => {
+      pesanAwal.style.display = "none";
+      mainContent.style.display = "block";
+
+      confetti({
+        particleCount: 200,
+        spread: 100,
+        origin: { y: 0.6 }
+      });
+
+      typeWriter();
+    });
+
+    const toggleButton = document.getElementById("toggleButton");
+    const photoCollage = document.getElementById("photo-collage");
+
+    toggleButton.addEventListener("click", () => {
+      photoCollage.classList.toggle("collapsed");
+
+      if (photoCollage.classList.contains("collapsed")) {
+        toggleButton.textContent = "Lihat Semua Foto 📸";
+      } else {
+        toggleButton.textContent = "Sembunyikan Foto ❌";
+      }
+    });
+
+    const text = "Semoga hari kamu seindah senyummu. Selamat ulang tahun ya, cintaku! 🎉💕";
+    const target = document.getElementById("typewriter");
+    let i = 0;
+
+    function typeWriter() {
+      if (i < text.length) {
+        target.innerHTML += text.charAt(i);
+        i++;
+        setTimeout(typeWriter, 60);
+      }
+    }
+  </script>
+</body>
+</html>
